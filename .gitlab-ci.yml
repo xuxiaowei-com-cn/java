@@ -1,6 +1,8 @@
 stages:
   # 阶段名称：构建
   - build
+  # 代码同步
+  - sync
 
 # job 名称
 build:
@@ -58,3 +60,8 @@ build:
     # 缓存路径
     paths:
       - .m2/repository
+
+# 嵌入
+include:
+  # 同步代码
+  - /sync.yml
