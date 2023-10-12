@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: java
+
+logging:
+  file:
+    # 文件名及路径
+    name: /logs/${spring.application.name}/${spring.application.name}.log
+    # 文件最大大小，单位: org.springframework.util.unit.DataSize
+    # 已废弃，推荐使用：logging.logback.rollingpolicy.max-file-size
+    # max-size: 20MB
+    # 日志保存天数
+    # 已废弃，推荐使用：logging.logback.rollingpolicy.max-history
+    # max-history: 365
+  logback:
+    rollingpolicy:
+      # 文件最大大小，单位: org.springframework.util.unit.DataSize
+      # 旧版使用：logging.file.max-size
+      max-file-size: 20MB
+      # 日志保存天数
+      # 旧版使用：logging.file.max-history
+      max-history: 365
+      # 压缩文件命名
+      # 后缀名中比原始配置添加了 `.log`，解压后方便打开看
+      # 旧版使用：logging.pattern.rolling-file-name
+      file-name-pattern: ${LOG_FILE}.%d{yyyy-MM-dd}.%i.log.gz
+  level:
+    web: debug
+    org.springframework.web: debug
+    cn.com.xuxiaowei.java: debug
