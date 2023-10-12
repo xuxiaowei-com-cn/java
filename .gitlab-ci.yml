@@ -46,7 +46,8 @@ build:
   # 执行脚本
   script:
     - echo -e $COLOR_BLUE'使用作者 Maven 私库配置文件构建 jar 包'$COLOR_RESET && mvn clean install -s settings-private.xml
-    - echo -e $COLOR_BLUE'使用作者 Maven 私库配置文件构建 docker 镜像'$COLOR_RESET && mvn docker:build -s settings-private.xml -Ddocker.username=$DOCKER_USERNAME -Ddocker.password=$DOCKER_PASSWORD
+    - echo -e $COLOR_BLUE'使用作者 Maven 私库配置文件构建 docker 镜像'$COLOR_RESET && mvn docker:build -s settings-private.xml
+    - echo -e $COLOR_BLUE'使用作者 Maven 私库配置文件构建 docker 镜像'$COLOR_RESET && mvn docker:push -s settings-private.xml -Ddocker.username=$DOCKER_USERNAME -Ddocker.password=$DOCKER_PASSWORD
   # 缓存
   cache:
     # 缓存名称
