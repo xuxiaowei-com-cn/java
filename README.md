@@ -38,7 +38,40 @@
     C:\Users\xuxiaowei>
     ```
 
-2. kubernetes（k8s）环境
+2. kubernetes（k8s） Service 环境
+
+    ```shell
+    kubectl apply -f https://jihulab.com/xuxiaowei-com-cn/java/-/raw/main/deploy.yaml
+    ```
+
+    ```shell
+    [root@k8s-control-plane-1 java]# kubectl get service java-resp-service 
+    NAME                TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+    java-resp-service   NodePort   10.108.23.26   <none>        8080:30780/TCP   9h
+    [root@k8s-control-plane-1 java]#
+    ```
+
+    ```shell
+    C:\Users\xuxiaowei>curl 172.25.25.220:30780
+    {"remoteHost":"172.25.25.4","headerNames":{"host":["172.25.25.220:30780"],"user-agent":["curl/8.0.1"],"accept":["*/*"]},"remotePort":57906,"remoteAddr":"172.25.25.4"}
+    C:\Users\xuxiaowei>
+    C:\Users\xuxiaowei>ipconfig
+    
+    Windows IP 配置
+    
+    
+    以太网适配器 以太网:
+    
+       连接特定的 DNS 后缀 . . . . . . . :
+       IPv4 地址 . . . . . . . . . . . . : 172.25.25.4
+       子网掩码  . . . . . . . . . . . . : 255.255.255.0
+       默认网关. . . . . . . . . . . . . : fe80::1%3
+                                           172.25.25.1
+    
+    C:\Users\xuxiaowei>
+    ```
+
+3. kubernetes（k8s） Nginx Ingress 环境
 
     ```shell
     kubectl apply -f https://jihulab.com/xuxiaowei-com-cn/java/-/raw/main/deploy.yaml

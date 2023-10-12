@@ -45,3 +45,4 @@ spec:
   selector:
     app: java-resp
   type: NodePort
+  externalTrafficPolicy: Local
