@@ -26,7 +26,7 @@
 		<!-- docker 私库 -->
 		<docker.registry>docker.io</docker.registry>
 		<!-- 命名空间 -->
-		<docker.namespace>xuxiaowei</docker.namespace>
+		<docker.namespace>xuxiaoweicomcn</docker.namespace>
 		<!-- docker 上传时的用户名 -->
 		<docker.username>admin</docker.username>
 		<!-- docker 上传时的密码，请使用：-Ddocker.password=xxx 来指定真实密码，请勿将真实密码写在此处 -->
