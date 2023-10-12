@@ -109,6 +109,8 @@
                                 <GROUP_ID>${project.groupId}</GROUP_ID>
                                 <ARTIFACT_ID>${project.artifactId}</ARTIFACT_ID>
                                 <VERSION>${project.version}</VERSION>
+                                <CI_SERVER_HOST>${CI_SERVER_HOST}</CI_SERVER_HOST>
+                                <CI_PROJECT_PATH>${CI_PROJECT_PATH}</CI_PROJECT_PATH>
                                 <!--
                                     CI_PIPELINE_ID：代表管道ID，用于确定管道的链接
                                  -->
@@ -237,6 +239,8 @@
                                 <GROUP_ID>${project.groupId}</GROUP_ID>
                                 <ARTIFACT_ID>${project.artifactId}</ARTIFACT_ID>
                                 <VERSION>${project.version}</VERSION>
+                                <CI_SERVER_HOST>${CI_SERVER_HOST}</CI_SERVER_HOST>
+                                <CI_PROJECT_PATH>${CI_PROJECT_PATH}</CI_PROJECT_PATH>
                                 <!--
                                     CI_PIPELINE_ID：代表管道ID，用于确定管道的链接
                                  -->
@@ -323,6 +327,8 @@
                                 <GROUP_ID>${project.groupId}</GROUP_ID>
                                 <ARTIFACT_ID>${project.artifactId}</ARTIFACT_ID>
                                 <VERSION>${project.version}</VERSION>
+                                <CI_SERVER_HOST>${CI_SERVER_HOST}</CI_SERVER_HOST>
+                                <CI_PROJECT_PATH>${CI_PROJECT_PATH}</CI_PROJECT_PATH>
                                 <!--
                                     CI_PIPELINE_ID：代表管道ID，用于确定管道的链接
                                  -->
