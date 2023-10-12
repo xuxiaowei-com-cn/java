@@ -26,6 +26,12 @@ public class IndexRestController {
         String remoteHost = request.getRemoteHost();
         map.put("remoteHost", remoteHost);
 
+        String remoteAddr = request.getRemoteAddr();
+        map.put("remoteAddr", remoteAddr);
+
+        int remotePort = request.getRemotePort();
+        map.put("remotePort", remotePort);
+
         Enumeration<String> headerNames = request.getHeaderNames();
         while (headerNames.hasMoreElements()) {
             String headerName = headerNames.nextElement();
