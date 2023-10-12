@@ -52,7 +52,7 @@ build:
     - echo -e $COLOR_BLUE'使用作者 Maven 私库配置文件构建 jar 包'$COLOR_RESET && mvn clean install -s settings-private.xml
     - echo -e $COLOR_BLUE'使用作者 Maven 私库配置文件构建 docker 镜像：构建的镜像包含 docker.io、registry.jihulab.com'$COLOR_RESET && mvn docker:build -s settings-private.xml -Pall
     - echo -e $COLOR_BLUE'使用作者 Maven 私库配置文件构建 docker 镜像：推送的镜像包含 docker.io'$COLOR_RESET && mvn docker:push -s settings-private.xml -Pdocker.io -Ddocker.username=$DOCKER_USERNAME -Ddocker.password=$DOCKER_PASSWORD
-    - echo -e $COLOR_BLUE'使用作者 Maven 私库配置文件构建 docker 镜像：推送的镜像包含 registry.jihulab.com'$COLOR_RESET && mvn docker:build -s settings-private.xml -Pregistry.jihulab.com -Ddocker.username=$JIHULAB_USERNAME -Ddocker.password=$JIHULAB_PRIVATE_TOKEN
+    - echo -e $COLOR_BLUE'使用作者 Maven 私库配置文件构建 docker 镜像：推送的镜像包含 registry.jihulab.com'$COLOR_RESET && mvn docker:push -s settings-private.xml -Pregistry.jihulab.com -Ddocker.username=$JIHULAB_USERNAME -Ddocker.password=$JIHULAB_PRIVATE_TOKEN
   # 缓存
   cache:
     # 缓存名称
