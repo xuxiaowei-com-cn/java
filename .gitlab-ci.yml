@@ -49,6 +49,9 @@ build:
     - echo -e $COLOR_BLUE'查看作者 Maven 私库配置文件'$COLOR_RESET && cat settings-private.xml
   # 执行脚本
   script:
+    - echo -e $COLOR_BLUE'使用作者 Maven 私库配置文件构建 jar 包：获取 groupId'$COLOR_RESET && GROUP_ID=`mvn -e -U help:evaluate -Dexpression=project.groupId -q -DforceStdout -s settings-private.xml`
+    - echo -e $COLOR_BLUE'使用作者 Maven 私库配置文件构建 jar 包：获取 artifactId'$COLOR_RESET && ARTIFACT_ID=`mvn -e -U help:evaluate -Dexpression=project.artifactId -q -DforceStdout -s settings-private.xml`
+    - echo -e $COLOR_BLUE'使用作者 Maven 私库配置文件构建 jar 包：获取 version'$COLOR_RESET && VERSION=`mvn help:evaluate -Dexpression=project.version -q -DforceStdout -s settings-private.xml`
     - echo -e $COLOR_BLUE'使用作者 Maven 私库配置文件构建 jar 包'$COLOR_RESET && mvn clean install -s settings-private.xml
     - echo -e $COLOR_BLUE'使用作者 Maven 私库配置文件构建 docker 镜像：构建的镜像包含 docker.io、registry.jihulab.com'$COLOR_RESET && mvn docker:build -s settings-private.xml -Pall
     - echo -e $COLOR_BLUE'使用作者 Maven 私库配置文件构建 docker 镜像：推送的镜像包含 docker.io'$COLOR_RESET && mvn docker:push -s settings-private.xml -Pdocker.io -Ddocker.username=$DOCKER_USERNAME -Ddocker.password=$DOCKER_PASSWORD
