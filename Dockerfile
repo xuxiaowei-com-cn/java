@@ -8,6 +8,8 @@ WORKDIR /home
 # 使用 pom.xml 中的 buildArgs 获取 groupId、artifactId、version 来确定 jar 包名称
 # 使用 GitLab Runner 中的 CI_PIPELINE_ID、CI_JOB_ID 来确定流水线ID（CI_PIPELINE_ID）与作业ID（CI_JOB_ID）
 
+ARG CI_SERVER_HOST
+ARG CI_PROJECT_PATH
 ARG GROUP_ID
 ARG ARTIFACT_ID
 ARG VERSION
@@ -32,6 +34,8 @@ EXPOSE 8080
 
 ENV TZ=Asia/Shanghai \
     LANG=C.UTF-8 \
+    CI_SERVER_HOST=$CI_SERVER_HOST \
+    CI_PROJECT_PATH=$CI_PROJECT_PATH \
     GROUP_ID=$GROUP_ID \
     ARTIFACT_ID=$ARTIFACT_ID \
     VERSION=$VERSION \
