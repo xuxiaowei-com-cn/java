@@ -8,9 +8,8 @@ WORKDIR /home
 # 使用 pom.xml 中的 buildArgs 获取 groupId、artifactId、version 来确定 jar 包名称
 # 使用 GitLab Runner 中的 CI_PIPELINE_ID、CI_JOB_ID 来确定流水线ID（CI_PIPELINE_ID）与作业ID（CI_JOB_ID）
 
-ARG GROUP_ID=$GROUP_ID
-ARG ARTIFACT_ID=$ARTIFACT_ID
-ARG VERSION=$VERSION
+ARG ARTIFACT_ID
+ARG VERSION
 
 # JAVA_OPTS
 # 可在构建docker镜像时，指定环境变量，指定后，会记录在docker镜像中环境 JAVA_OPTS 中
