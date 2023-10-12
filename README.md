@@ -54,7 +54,7 @@
 
     ```shell
     C:\Users\xuxiaowei>curl --resolve java.resp.localdev.me:80:172.25.25.220 http://java.resp.localdev.me
-    {"remoteHost":"172.25.25.4","headerNames":{"x-request-id":["a48ab4e34d281f77ab805eece24f3be2"],"x-real-ip":["172.25.25.4"],"x-forwarded-scheme":["http"],"x-forwarded-host":["java.resp.localdev.me"],"x-forwarded-proto":["http"],"host":["java.resp.localdev.me"],"x-forwarded-port":["80"],"x-scheme":["http"],"user-agent":["curl/8.0.1"],"accept":["*/*"]}}
+    {"remoteHost":"172.25.25.4","headerNames":{"x-request-id":["d247e647b045743eb15236c67d125639"],"x-real-ip":["172.25.25.4"],"x-forwarded-scheme":["http"],"x-forwarded-host":["java.resp.localdev.me"],"x-forwarded-proto":["http"],"host":["java.resp.localdev.me"],"x-forwarded-port":["80"],"x-scheme":["http"],"user-agent":["curl/8.0.1"],"accept":["*/*"]},"remotePort":40378,"remoteAddr":"172.25.25.4"}
     C:\Users\xuxiaowei>
     C:\Users\xuxiaowei>ipconfig
     
