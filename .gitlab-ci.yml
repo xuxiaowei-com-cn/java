@@ -1,0 +1,57 @@
+stages:
+  # 阶段名称：构建
+  - build
+
+# job 名称
+build:
+  # 阶段名称
+  stage: build
+  # 环境变量
+  variables:
+    # maven 环境变量
+    MAVEN_OPTS: >-
+      -Dhttps.protocols=TLSv1.2
+      -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository
+      -Dorg.slf4j.simpleLogger.showDateTime=true
+      -Djava.awt.headless=true
+    # 颜色定义
+    COLOR_BLUE: \033[34m
+    COLOR_GREEN: \033[92m
+    COLOR_RED: \033[31m
+    COLOR_RESET: \033[0m
+    COLOR_YELLOW: \033[93m
+  # 镜像
+  image: maven:3.6.3-jdk-8
+  # 使用的服务
+  # 如果是基于 k8s 运行流水线，请以特权身份运行（在 /etc/gitlab-runner/config.toml 中配置 privileged = true），否则无法使用 services
+  # 由于要访问域名 nexus.xuxiaowei.cn、hosted.docker.xuxiaowei.cn，所以在 /etc/gitlab-runner/config.toml 中配置了对应的 runners.kubernetes.host_aliases
+  services:
+    # 使用 docker 服务，用于构建 docker 镜像
+    - name: docker:dind
+      # 服务别名
+      alias: docker-dind
+      variables:
+        # 关闭 TLS（仅使用 http）
+        DOCKER_TLS_CERTDIR: ""
+      # docker 镜像发布域名 hosted.docker.xuxiaowei.cn（仅作者局域网可以访问）
+      # 默认情况下域名 hosted.docker.xuxiaowei.cn 证书可能不受信任（可能是非权威机构颁发的证书，也可能是容器镜像无法识别权威机构颁发的域名证书）
+      # 信任域名证书
+      command: [ "--insecure-registry=hosted.docker.xuxiaowei.cn" ]
+  # 执行脚本前的任务
+  before_script:
+    # 此处使用 http 而非 https，因为 https 证书可能不受信任（可能是非权威机构颁发的证书，也可能是容器镜像无法识别权威机构颁发的域名证书）
+    # 下载的 settings-private.xml 配置文件里使用的也是 http 协议
+    - echo -e $COLOR_BLUE'下载作者 Maven 私库配置文件（仅作者局域网可用）'$COLOR_RESET && curl -o settings-private.xml http://nexus.xuxiaowei.cn/repository/raw-hosted/maven/settings-private.xml
+    - echo -e $COLOR_BLUE'查看作者 Maven 私库配置文件'$COLOR_RESET && cat settings-private.xml
+  # 执行脚本
+  script:
+    - echo -e $COLOR_BLUE'使用作者 Maven 私库配置文件构建 jar 包'$COLOR_RESET && mvn clean install -s settings-private.xml
+    - echo -e $COLOR_BLUE'使用作者 Maven 私库配置文件构建 docker 镜像'$COLOR_RESET && mvn docker:build -s settings-private.xml -Ddocker.username=$DOCKER_USERNAME -Ddocker.password=$DOCKER_PASSWORD
+  # 缓存
+  cache:
+    # 缓存名称
+    # 使用 job 名称
+    key: "${CI_JOB_NAME}-${CI_COMMIT_BRANCH}"
+    # 缓存路径
+    paths:
+      - .m2/repository
