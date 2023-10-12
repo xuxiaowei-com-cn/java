@@ -15,9 +15,9 @@ spec:
     spec:
       containers:
         - name: java-resp
-          # 国内镜像：registry.jihulab.com/xuxiaowei-cloud/xuxiaowei-cloud/java:0.0.1-SNAPSHOT
+          # 国内镜像：registry.jihulab.com/xuxiaowei-com-cn/java:0.0.1-SNAPSHOT
           # 国外镜像：xuxiaoweicomcn/java:0.0.1-SNAPSHOT
-          image: registry.jihulab.com/xuxiaowei-cloud/xuxiaowei-cloud/java:0.0.1-SNAPSHOT
+          image: registry.jihulab.com/xuxiaowei-com-cn/java:0.0.1-SNAPSHOT
           ports:
             - containerPort: 8080
           volumeMounts:
