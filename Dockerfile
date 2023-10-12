@@ -8,20 +8,9 @@ WORKDIR /home
 # 使用 pom.xml 中的 buildArgs 获取 groupId、artifactId、version 来确定 jar 包名称
 # 使用 GitLab Runner 中的 CI_PIPELINE_ID、CI_JOB_ID 来确定流水线ID（CI_PIPELINE_ID）与作业ID（CI_JOB_ID）
 
-ARG GROUP_ID=${GROUP_ID}
-ARG ARTIFACT_ID=${ARTIFACT_ID}
-ARG VERSION=${VERSION}
-ARG CI_PIPELINE_ID=${CI_PIPELINE_ID}
-ARG CI_JOB_ID=${CI_JOB_ID}
-ARG JAVA_OPTS=${JAVA_OPTS}
-
-RUN printf "GROUP_ID: %s\n" "$GROUP_ID" \
-    && printf "ARTIFACT_ID: %s\n" "$ARTIFACT_ID" \
-    && printf "VERSION: %s\n" "$VERSION" \
-    && printf "CI_PIPELINE_ID: %s\n" "$CI_PIPELINE_ID" \
-    && printf "CI_JOB_ID: %s\n" "$CI_JOB_ID" \
-    && printf "JAVA_OPTS: %s\n" "$JAVA_OPTS" \
-    && printf "APP_ARGS: %s\n" "$APP_ARGS"
+ARG GROUP_ID=$GROUP_ID
+ARG ARTIFACT_ID=$ARTIFACT_ID
+ARG VERSION=$VERSION
 
 # JAVA_OPTS
 # 可在构建docker镜像时，指定环境变量，指定后，会记录在docker镜像中环境 JAVA_OPTS 中
@@ -39,12 +28,12 @@ EXPOSE 8080
 
 ENV TZ=Asia/Shanghai \
     LANG=C.UTF-8 \
-    GROUP_ID=${GROUP_ID} \
-    ARTIFACT_ID=${ARTIFACT_ID} \
-    VERSION=${VERSION} \
-    CI_PIPELINE_ID=${CI_PIPELINE_ID} \
-    CI_JOB_ID=${CI_JOB_ID} \
-    JAVA_OPTS=${JAVA_OPTS} \
-    APP_ARGS=${APP_ARGS}
+    GROUP_ID=$GROUP_ID \
+    ARTIFACT_ID=$ARTIFACT_ID \
+    VERSION=$VERSION \
+    CI_PIPELINE_ID=$CI_PIPELINE_ID \
+    CI_JOB_ID=$CI_JOB_ID \
+    JAVA_OPTS=$JAVA_OPTS \
+    APP_ARGS=$APP_ARGS
 
 CMD java $JAVA_OPTS -jar app.jar $APP_ARGS
