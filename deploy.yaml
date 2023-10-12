@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-resp-deployment
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: java-resp
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: java-resp
+    spec:
+      containers:
+        - name: java-resp
+          # 国内镜像：registry.jihulab.com/xuxiaowei-cloud/xuxiaowei-cloud/java:0.0.1-SNAPSHOT
+          # 国外镜像：xuxiaoweicomcn/java:0.0.1-SNAPSHOT
+          image: registry.jihulab.com/xuxiaowei-cloud/xuxiaowei-cloud/java:0.0.1-SNAPSHOT
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            # 挂载主机的时区文件
+            - name: time-zone
+              mountPath: /etc/localtime
+      volumes:
+        - name: time-zone
+          hostPath:
+            path: /etc/localtime
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: java-resp-service
+  namespace: default
+spec:
+  ports:
+    - nodePort: 30780
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: java-resp
+  type: NodePort
