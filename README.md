@@ -43,6 +43,8 @@
 
    [保留客户端源 IP（不推荐）](https://kubernetes.io/zh-cn/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip)
 
+   ***需要访问pod部署节点的IP，而不是集群的任意节点IP***
+
     ```shell
     kubectl apply -f https://jihulab.com/xuxiaowei-com-cn/java/-/raw/main/deploy/deploy-service.yaml
     ```
