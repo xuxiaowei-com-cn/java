@@ -33,16 +33,16 @@ public class IndexRestController {
         int remotePort = request.getRemotePort();
         map.put("remotePort", remotePort);
 
-        map.put(HttpHeaders.FORWARDED, Collections.list(request.getHeaders(HttpHeaders.FORWARDED)));
-        map.put(HttpHeaders.X_FORWARDED_FOR, Collections.list(request.getHeaders(HttpHeaders.X_FORWARDED_FOR)));
-        map.put(HttpHeaders.X_FORWARDED_HOST, Collections.list(request.getHeaders(HttpHeaders.X_FORWARDED_HOST)));
-        map.put(HttpHeaders.X_FORWARDED_PORT, Collections.list(request.getHeaders(HttpHeaders.X_FORWARDED_PORT)));
-        map.put(HttpHeaders.X_FORWARDED_PROTO, Collections.list(request.getHeaders(HttpHeaders.X_FORWARDED_PROTO)));
-        map.put(HttpHeaders.X_FORWARDED_SCHEME, Collections.list(request.getHeaders(HttpHeaders.X_FORWARDED_SCHEME)));
-        map.put(HttpHeaders.X_ORIGINAL_FORWARDED_FOR, Collections.list(request.getHeaders(HttpHeaders.X_ORIGINAL_FORWARDED_FOR)));
-        map.put(HttpHeaders.X_REAL_IP, Collections.list(request.getHeaders(HttpHeaders.X_REAL_IP)));
-        map.put(HttpHeaders.X_REQUEST_ID, Collections.list(request.getHeaders(HttpHeaders.X_REQUEST_ID)));
-        map.put(HttpHeaders.X_SCHEME, Collections.list(request.getHeaders(HttpHeaders.X_SCHEME)));
+        HttpHeaders.forwarded(request, map);
+        HttpHeaders.xForwardedFor(request, map);
+        HttpHeaders.xForwardedHost(request, map);
+        HttpHeaders.xForwardedPort(request, map);
+        HttpHeaders.xForwardedProto(request, map);
+        HttpHeaders.xForwardedScheme(request, map);
+        HttpHeaders.xOriginalForwardedFor(request, map);
+        HttpHeaders.xRealIp(request, map);
+        HttpHeaders.xRequestId(request, map);
+        HttpHeaders.xScheme(request, map);
 
         Enumeration<String> headerNames = request.getHeaderNames();
         while (headerNames.hasMoreElements()) {
