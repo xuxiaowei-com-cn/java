@@ -42,7 +42,7 @@ build:
   # 执行脚本前的任务
   before_script:
     # 等待 docker 服务启动
-    - sleep 30000
+    - sleep 30
     # 此处使用 http 而非 https，因为 https 证书可能不受信任（可能是非权威机构颁发的证书，也可能是容器镜像无法识别权威机构颁发的域名证书）
     # 下载的 settings-private.xml 配置文件里使用的也是 http 协议
     - echo -e $COLOR_BLUE'下载作者 Maven 私库配置文件（仅作者局域网可用）'$COLOR_RESET && curl -o settings-private.xml http://nexus.xuxiaowei.cn/repository/raw-hosted/maven/settings-private.xml
