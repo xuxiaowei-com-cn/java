@@ -29,7 +29,7 @@ build:
   # 由于要访问域名 nexus.xuxiaowei.cn、hosted.docker.xuxiaowei.cn，所以在 /etc/gitlab-runner/config.toml 中配置了对应的 runners.kubernetes.host_aliases
   services:
     # 使用 docker 服务，用于构建 docker 镜像
-    - name: docker:dind
+    - name: docker:24.0.6-dind
       # 服务别名
       alias: docker-dind
       variables:
