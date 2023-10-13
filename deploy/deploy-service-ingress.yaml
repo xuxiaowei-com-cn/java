@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-resp-2-deployment
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: java-resp-2
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: java-resp-2
+    spec:
+      containers:
+        - name: java-resp-2
+          # 国内镜像：registry.jihulab.com/xuxiaowei-com-cn/java:0.0.1-SNAPSHOT
+          # 国外镜像：xuxiaoweicomcn/java:0.0.1-SNAPSHOT
+          image: registry.jihulab.com/xuxiaowei-com-cn/java:0.0.1-SNAPSHOT
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            # 挂载主机的时区文件
+            - name: time-zone
+              mountPath: /etc/localtime
+      volumes:
+        - name: time-zone
+          hostPath:
+            path: /etc/localtime
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: java-resp-2-service
+  namespace: default
+spec:
+  ports:
+    - nodePort: 30890
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: java-resp-2
+  type: NodePort
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: default
+  name: java-resp-2-localhost
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: java.resp-2.localdev.me
+      http:
+        paths:
+          - backend:
+              service:
+                name: java-resp-2-service
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix

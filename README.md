@@ -42,13 +42,13 @@
 2. kubernetes（k8s） Service 环境
 
     ```shell
-    kubectl apply -f https://jihulab.com/xuxiaowei-com-cn/java/-/raw/main/deploy.yaml
+    kubectl apply -f https://jihulab.com/xuxiaowei-com-cn/java/-/raw/main/deploy/deploy-service.yaml
     ```
 
     ```shell
-    [root@k8s-control-plane-1 java]# kubectl get service java-resp-service 
-    NAME                TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
-    java-resp-service   NodePort   10.108.23.26   <none>        8080:30780/TCP   9h
+    [root@k8s-control-plane-1 java]# kubectl get service java-resp-1-service 
+    NAME                  TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+    java-resp-1-service   NodePort   10.108.23.26   <none>        8080:30780/TCP   9h
     [root@k8s-control-plane-1 java]#
     ```
 
@@ -75,20 +75,19 @@
 3. kubernetes（k8s） Nginx Ingress 环境
 
     ```shell
-    kubectl apply -f https://jihulab.com/xuxiaowei-com-cn/java/-/raw/main/deploy.yaml
-    kubectl apply -f https://jihulab.com/xuxiaowei-com-cn/java/-/raw/main/ingress.yaml
+    kubectl apply -f https://jihulab.com/xuxiaowei-com-cn/java/-/raw/main/deploy/deploy-service-ingress.yaml
     ```
 
     ```shell
-    [root@k8s-control-plane-1 ~]# kubectl get ingress java-resp-localhost
-    NAME                  CLASS   HOSTS                   ADDRESS   PORTS   AGE
-    java-resp-localhost   nginx   java.resp.localdev.me             80      8h
+    [root@k8s-control-plane-1 ~]# kubectl get ingress java-resp-2-localhost
+    NAME                    CLASS   HOSTS                     ADDRESS   PORTS   AGE
+    java-resp-2-localhost   nginx   java.resp-2.localdev.me             80      8h
     [root@k8s-control-plane-1 ~]#
     ```
 
     ```shell
-    C:\Users\xuxiaowei>curl --resolve java.resp.localdev.me:80:172.25.25.220 http://java.resp.localdev.me
-    {"remoteHost":"172.25.25.4","headerNames":{"x-request-id":["d247e647b045743eb15236c67d125639"],"x-real-ip":["172.25.25.4"],"x-forwarded-scheme":["http"],"x-forwarded-host":["java.resp.localdev.me"],"x-forwarded-proto":["http"],"host":["java.resp.localdev.me"],"x-forwarded-port":["80"],"x-scheme":["http"],"user-agent":["curl/8.0.1"],"accept":["*/*"]},"remotePort":40378,"remoteAddr":"172.25.25.4"}
+    C:\Users\xuxiaowei>curl --resolve java.resp-2.localdev.me:80:172.25.25.220 http://java.resp-2.localdev.me
+    {"remoteHost":"172.25.25.4","headerNames":{"x-request-id":["d247e647b045743eb15236c67d125639"],"x-real-ip":["172.25.25.4"],"x-forwarded-scheme":["http"],"x-forwarded-host":["java.resp-2.localdev.me"],"x-forwarded-proto":["http"],"host":["java.resp-2.localdev.me"],"x-forwarded-port":["80"],"x-scheme":["http"],"user-agent":["curl/8.0.1"],"accept":["*/*"]},"remotePort":40378,"remoteAddr":"172.25.25.4"}
     C:\Users\xuxiaowei>
     C:\Users\xuxiaowei>ipconfig
     

@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: java-resp-deployment
+  name: java-resp-1-deployment
   namespace: default
 spec:
   selector:
     matchLabels:
-      app: java-resp
+      app: java-resp-1
   replicas: 1
   template:
     metadata:
       labels:
-        app: java-resp
+        app: java-resp-1
     spec:
       containers:
-        - name: java-resp
+        - name: java-resp-1
           # 国内镜像：registry.jihulab.com/xuxiaowei-com-cn/java:0.0.1-SNAPSHOT
           # 国外镜像：xuxiaoweicomcn/java:0.0.1-SNAPSHOT
           image: registry.jihulab.com/xuxiaowei-com-cn/java:0.0.1-SNAPSHOT
@@ -34,7 +34,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: java-resp-service
+  name: java-resp-1-service
   namespace: default
 spec:
   ports:
@@ -43,6 +43,6 @@ spec:
       protocol: TCP
       targetPort: 8080
   selector:
-    app: java-resp
+    app: java-resp-1
   type: NodePort
   externalTrafficPolicy: Local
