@@ -45,4 +45,5 @@ spec:
   selector:
     app: java-resp-1
   type: NodePort
+  # 保留客户端源 IP（不推荐）: https://kubernetes.io/zh-cn/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip
   externalTrafficPolicy: Local

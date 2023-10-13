@@ -16,9 +16,9 @@
      -p 63456:8080 \
      registry.jihulab.com/xuxiaowei-com-cn/java:0.0.1-SNAPSHOT
    ```
-    
+
    测试示例
-    
+
     ```shell
     C:\Users\xuxiaowei>curl http://172.25.25.221:63456
     {"remoteHost":"172.25.25.4","headerNames":{"host":["172.25.25.221:63456"],"user-agent":["curl/8.0.1"],"accept":["*/*"]},"remotePort":53580,"remoteAddr":"172.25.25.4"}
@@ -39,7 +39,9 @@
     C:\Users\xuxiaowei>
     ```
 
-2. kubernetes（k8s） Service 环境
+2. kubernetes（k8s） Service 环境（不推荐）
+
+   [保留客户端源 IP（不推荐）](https://kubernetes.io/zh-cn/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip)
 
     ```shell
     kubectl apply -f https://jihulab.com/xuxiaowei-com-cn/java/-/raw/main/deploy/deploy-service.yaml
@@ -72,7 +74,7 @@
     C:\Users\xuxiaowei>
     ```
 
-3. kubernetes（k8s） Nginx Ingress 环境
+3. kubernetes（k8s） Nginx Ingress 环境（推荐）
 
     ```shell
     kubectl apply -f https://jihulab.com/xuxiaowei-com-cn/java/-/raw/main/deploy/deploy-service-ingress.yaml
