@@ -91,7 +91,7 @@
 
     ```shell
     C:\Users\xuxiaowei>curl --resolve java.resp-2.localdev.me:80:172.25.25.220 http://java.resp-2.localdev.me
-    {"remoteHost":"172.25.25.4","headerNames":{"x-request-id":["d247e647b045743eb15236c67d125639"],"x-real-ip":["172.25.25.4"],"x-forwarded-scheme":["http"],"x-forwarded-host":["java.resp-2.localdev.me"],"x-forwarded-proto":["http"],"host":["java.resp-2.localdev.me"],"x-forwarded-port":["80"],"x-scheme":["http"],"user-agent":["curl/8.0.1"],"accept":["*/*"]},"remotePort":40378,"remoteAddr":"172.25.25.4"}
+    {"remoteHost":"172.25.25.4","X-Request-ID":["59fe194f72c4d6aec891f4b7d8bbc2ea"],"headerNames":{"x-request-id":["59fe194f72c4d6aec891f4b7d8bbc2ea"],"x-real-ip":["172.25.25.4"],"x-forwarded-scheme":["http"],"x-forwarded-host":["java.resp-2.localdev.me"],"x-forwarded-proto":["http"],"host":["java.resp-2.localdev.me"],"x-forwarded-port":["80"],"x-scheme":["http"],"user-agent":["curl/8.0.1"],"accept":["*/*"]},"remotePort":49254,"X-Forwarded-Host":["java.resp-2.localdev.me"],"X-Forwarded-Proto":["http"],"X-Forwarded-Port":["80"],"X-Forwarded-Scheme":["http"],"X-Real-Ip":["172.25.25.4"],"remoteAddr":"172.25.25.4","X-Scheme":["http"]}
     C:\Users\xuxiaowei>
     C:\Users\xuxiaowei>ipconfig
     
