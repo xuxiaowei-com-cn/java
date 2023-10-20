@@ -1,6 +1,7 @@
 package cn.com.xuxiaowei.java.controller;
 
 import cn.com.xuxiaowei.java.common.net.HttpHeaders;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,11 +16,15 @@ import java.util.Map;
  * @author xuxiaowei
  * @since 0.0.1
  */
+@Slf4j
 @RestController
 public class IndexRestController {
 
     @RequestMapping("")
     public Map<String, Object> index(HttpServletRequest request, HttpServletResponse response) {
+        String queryString = request.getQueryString();
+        log.info("接收到参数：{}", queryString);
+
         Map<String, Object> map = new HashMap<>();
         Map<String, Object> headerNamesMap = new HashMap<>();
         map.put("headerNames", headerNamesMap);
