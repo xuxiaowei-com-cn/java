@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-resp-ipv6-2-deployment
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: java-resp-ipv6-2
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: java-resp-ipv6-2
+    spec:
+      containers:
+        - name: java-resp-ipv6-2
+          # 国内镜像：registry.jihulab.com/xuxiaowei-com-cn/java:0.0.1-SNAPSHOT
+          # 国外镜像：xuxiaoweicomcn/java:0.0.1-SNAPSHOT
+          image: registry.jihulab.com/xuxiaowei-com-cn/java:0.0.1-SNAPSHOT
+          # 在拉取镜像时的策略
+          # IfNotPresent：默认值，如果选择 IfNotPresent，可缺省 imagePullPolicy。创建容器时，只在本地不存在该镜像时才去拉取。提高容器启动的速度和效率，特别适用于频繁启动和停止的场景。
+          # Always：无论本地是否已存在该镜像，容器都会尝试去拉取最新的镜像。
+          # Never：容器将不会去拉取该镜像，仅依赖于本地已存在的镜像。如果本地不存在该镜像，则容器无法成功启动。
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            # 挂载主机的时区文件
+            - name: time-zone
+              mountPath: /etc/localtime
+      volumes:
+        - name: time-zone
+          hostPath:
+            path: /etc/localtime
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: java-resp-ipv6-2-service
+  namespace: default
+spec:
+  ports:
+    - nodePort: 30890
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: java-resp-ipv6-2
+  type: NodePort
+  ipFamilies:
+    - IPv4
+    # 支持 IPv6
+    # 此配置存在先后顺序的区别，前者为主
+    - IPv6
+  # 支持 IPv6
+  ipFamilyPolicy: RequireDualStack
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: default
+  name: java-resp-ipv6-2-localhost
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: java.resp-ipv6-2.localdev.me
+      http:
+        paths:
+          - backend:
+              service:
+                name: java-resp-ipv6-2-service
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
