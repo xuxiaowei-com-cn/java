@@ -15,9 +15,9 @@ spec:
     spec:
       containers:
         - name: java-resp-1
-          # 国内镜像：registry.jihulab.com/xuxiaowei-com-cn/java:0.0.1-SNAPSHOT
+          # 国内镜像：registry.cn-qingdao.aliyuncs.com/xuxiaowei/java:0.0.1-SNAPSHOT
           # 国外镜像：xuxiaoweicomcn/java:0.0.1-SNAPSHOT
-          image: registry.jihulab.com/xuxiaowei-com-cn/java:0.0.1-SNAPSHOT
+          image: registry.cn-qingdao.aliyuncs.com/xuxiaowei/java:0.0.1-SNAPSHOT
           # 在拉取镜像时的策略
           # IfNotPresent：默认值，如果选择 IfNotPresent，可缺省 imagePullPolicy。创建容器时，只在本地不存在该镜像时才去拉取。提高容器启动的速度和效率，特别适用于频繁启动和停止的场景。
           # Always：无论本地是否已存在该镜像，容器都会尝试去拉取最新的镜像。
