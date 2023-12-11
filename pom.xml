@@ -87,7 +87,7 @@
 
     <profiles>
 
-        <!-- 用于构建 docker.io、registry.jihulab.com 镜像 -->
+        <!-- 用于构建 docker.io、registry.cn-qingdao.aliyuncs.com 镜像 -->
         <profile>
             <id>all</id>
             <build>
@@ -171,7 +171,7 @@
                                 <image>
                                     <!-- 镜像名称 -->
                                     <name>
-                                        registry.jihulab.com/xuxiaowei-cloud/xuxiaowei-cloud/${project.artifactId}:${project.version}
+                                        registry.cn-qingdao.aliyuncs.com/${docker.namespace}/${project.artifactId}:${project.version}
                                     </name>
                                     <build>
                                         <dockerFile>${project.basedir}/Dockerfile</dockerFile>
@@ -183,28 +183,7 @@
                                         CI_PIPELINE_ID：代表管道ID，用于确定管道的链接
                                      -->
                                     <name>
-                                        registry.jihulab.com/xuxiaowei-cloud/xuxiaowei-cloud/${project.artifactId}:${project.version}-${CI_PIPELINE_ID}
-                                    </name>
-                                    <build>
-                                        <dockerFile>${project.basedir}/Dockerfile</dockerFile>
-                                    </build>
-                                </image>
-                                <image>
-                                    <!-- 镜像名称 -->
-                                    <name>
-                                        registry.jihulab.com/xuxiaowei-com-cn/${project.artifactId}:${project.version}
-                                    </name>
-                                    <build>
-                                        <dockerFile>${project.basedir}/Dockerfile</dockerFile>
-                                    </build>
-                                </image>
-                                <image>
-                                    <!--
-                                        镜像名称：在版本后面增加了数字，用于储存历史记录、快速恢复容器（也可使用k8s滚动发布进行恢复）、k8s更改镜像中使用（用于发布），不需要者请注释掉此 image
-                                        CI_PIPELINE_ID：代表管道ID，用于确定管道的链接
-                                     -->
-                                    <name>
-                                        registry.jihulab.com/xuxiaowei-com-cn/${project.artifactId}:${project.version}-${CI_PIPELINE_ID}
+                                        registry.cn-qingdao.aliyuncs.com/${docker.namespace}/${project.artifactId}:${project.version}-${CI_PIPELINE_ID}
                                     </name>
                                     <build>
                                         <dockerFile>${project.basedir}/Dockerfile</dockerFile>
@@ -305,9 +284,9 @@
             </build>
         </profile>
 
-        <!-- 用于推送 registry.jihulab.com 镜像 -->
+        <!-- 用于推送 registry.cn-qingdao.aliyuncs.com 镜像 -->
         <profile>
-            <id>registry.jihulab.com</id>
+            <id>aliyuncs</id>
             <build>
                 <plugins>
                     <!-- https://mvnrepository.com/artifact/io.fabric8/docker-maven-plugin -->
@@ -368,7 +347,7 @@
                                 <image>
                                     <!-- 镜像名称 -->
                                     <name>
-                                        registry.jihulab.com/xuxiaowei-cloud/xuxiaowei-cloud/${project.artifactId}:${project.version}
+                                        registry.cn-qingdao.aliyuncs.com/${docker.namespace}/${project.artifactId}:${project.version}
                                     </name>
                                     <build>
                                         <dockerFile>${project.basedir}/Dockerfile</dockerFile>
@@ -380,28 +359,7 @@
                                         CI_PIPELINE_ID：代表管道ID，用于确定管道的链接
                                      -->
                                     <name>
-                                        registry.jihulab.com/xuxiaowei-cloud/xuxiaowei-cloud/${project.artifactId}:${project.version}-${CI_PIPELINE_ID}
-                                    </name>
-                                    <build>
-                                        <dockerFile>${project.basedir}/Dockerfile</dockerFile>
-                                    </build>
-                                </image>
-                                <image>
-                                    <!-- 镜像名称 -->
-                                    <name>
-                                        registry.jihulab.com/xuxiaowei-com-cn/${project.artifactId}:${project.version}
-                                    </name>
-                                    <build>
-                                        <dockerFile>${project.basedir}/Dockerfile</dockerFile>
-                                    </build>
-                                </image>
-                                <image>
-                                    <!--
-                                        镜像名称：在版本后面增加了数字，用于储存历史记录、快速恢复容器（也可使用k8s滚动发布进行恢复）、k8s更改镜像中使用（用于发布），不需要者请注释掉此 image
-                                        CI_PIPELINE_ID：代表管道ID，用于确定管道的链接
-                                     -->
-                                    <name>
-                                        registry.jihulab.com/xuxiaowei-com-cn/${project.artifactId}:${project.version}-${CI_PIPELINE_ID}
+                                        registry.cn-qingdao.aliyuncs.com/${docker.namespace}/${project.artifactId}:${project.version}-${CI_PIPELINE_ID}
                                     </name>
                                     <build>
                                         <dockerFile>${project.basedir}/Dockerfile</dockerFile>
