@@ -14,7 +14,7 @@
      --privileged=true \
      --name java-0.0.1-SNAPSHOT \
      -p 63456:8080 \
-     registry.jihulab.com/xuxiaowei-com-cn/java:0.0.1-SNAPSHOT
+     registry.cn-qingdao.aliyuncs.com/xuxiaoweicomcn/java:0.0.1-SNAPSHOT
    ```
 
    测试示例
@@ -46,7 +46,7 @@
    ***需要访问pod部署节点的IP，而不是集群的任意节点IP***
 
     ```shell
-    kubectl apply -f https://jihulab.com/xuxiaowei-com-cn/java/-/raw/main/deploy/deploy-service.yaml
+    kubectl apply -f https://gitee.com/xuxiaowei-com-cn/java/raw/main/deploy/deploy-service.yaml
     ```
 
     ```shell
@@ -79,7 +79,7 @@
 3. kubernetes（k8s） Nginx Ingress 环境（推荐）
 
     ```shell
-    kubectl apply -f https://jihulab.com/xuxiaowei-com-cn/java/-/raw/main/deploy/deploy-service-ingress.yaml
+    kubectl apply -f https://gitee.com/xuxiaowei-com-cn/java/raw/main/deploy/deploy-service-ingress.yaml
     ```
 
     ```shell
