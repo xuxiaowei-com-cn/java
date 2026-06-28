@@ -23,6 +23,14 @@ build:
     - docker manifest push $TO_IMAGE:$VERSION
     - docker manifest create $TO_IMAGE:$VERSION-$CI_PIPELINE_IID $TO_IMAGE:$VERSION-$CI_PIPELINE_IID-amd64 $TO_IMAGE:$VERSION-$CI_PIPELINE_IID-arm64 $TO_IMAGE:$VERSION-$CI_PIPELINE_IID-loong64
     - docker manifest push $TO_IMAGE:$VERSION-$CI_PIPELINE_IID
+    # crane from https://github.com/google/go-containerregistry (go build ./cmd/crane)
+    - crane auth login registry.cn-qingdao.aliyuncs.com -u $JIB_TO_AUTH_USERNAME -p $JIB_TO_AUTH_PASSWORD
+    - crane delete $TO_IMAGE:$VERSION-amd64
+    - crane delete $TO_IMAGE:$VERSION-arm64
+    - crane delete $TO_IMAGE:$VERSION-loong64
+    - crane delete $TO_IMAGE:$VERSION-$CI_PIPELINE_IID-amd64
+    - crane delete $TO_IMAGE:$VERSION-$CI_PIPELINE_IID-arm64
+    - crane delete $TO_IMAGE:$VERSION-$CI_PIPELINE_IID-loong64
   cache:
     key: "${CI_JOB_NAME}-${CI_COMMIT_BRANCH}"
     paths:
