@@ -22,11 +22,10 @@ build:
     # Build loong64 (loong64 JDK base) → temporary tags
     - mvn -V -B compile jib:build -P loong64 -Dto.tag.suffix=-loong64 -Dto.auth.username=$JIB_TO_AUTH_USERNAME -Dto.auth.password=$JIB_TO_AUTH_PASSWORD -DCI_PIPELINE_IID=$CI_PIPELINE_IID
     # Merge into multi-arch manifest list
+    # Use buildx imagetools (not docker manifest) because -tmp-a64 is already a manifest list
     - docker login --username $JIB_TO_AUTH_USERNAME --password $JIB_TO_AUTH_PASSWORD registry.cn-qingdao.aliyuncs.com
-    - docker manifest create $TO_IMAGE:$VERSION $TO_IMAGE:$VERSION-tmp-a64 $TO_IMAGE:$VERSION-loong64
-    - docker manifest create $TO_IMAGE:$VERSION-$CI_PIPELINE_IID $TO_IMAGE:$VERSION-$CI_PIPELINE_IID-tmp-a64 $TO_IMAGE:$VERSION-$CI_PIPELINE_IID-loong64
-    - docker manifest push $TO_IMAGE:$VERSION
-    - docker manifest push $TO_IMAGE:$VERSION-$CI_PIPELINE_IID
+    - docker buildx imagetools create -t $TO_IMAGE:$VERSION $TO_IMAGE:$VERSION-tmp-a64 $TO_IMAGE:$VERSION-loong64
+    - docker buildx imagetools create -t $TO_IMAGE:$VERSION-$CI_PIPELINE_IID $TO_IMAGE:$VERSION-$CI_PIPELINE_IID-tmp-a64 $TO_IMAGE:$VERSION-$CI_PIPELINE_IID-loong64
   cache:
     key: "${CI_JOB_NAME}-${CI_COMMIT_BRANCH}"
     paths:
