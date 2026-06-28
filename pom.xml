@@ -101,13 +101,17 @@
             <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
+                <version>${jib-maven-plugin.version}</version>
                 <configuration>
                     <from>
                         <image>${from.image}</image>
                     </from>
                     <to>
-                        <image>${to.image}:${project.version}</image>
-                        <image>${to.image}:${project.version}-${CI_PIPELINE_IID}</image>
+                        <image>${to.image}</image>
+                        <tags>
+                            <tag>${project.version}</tag>
+                            <tag>${project.version}-${CI_PIPELINE_IID}</tag>
+                        </tags>
                         <auth>
                             <username>${to.auth.username}</username>
                             <password>${to.auth.password}</password>
