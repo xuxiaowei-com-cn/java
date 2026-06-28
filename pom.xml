@@ -16,6 +16,17 @@
     <properties>
         <java.version>1.8</java.version>
         <lombok.version>1.18.38</lombok.version>
+        <jib-maven-plugin.version>3.5.1</jib-maven-plugin.version>
+        <from.image>registry.cn-qingdao.aliyuncs.com/xuxiaoweicomcn/dragonwell:8.29.28-extended-ga-anolis
+        </from.image>
+        <to.image>registry.cn-qingdao.aliyuncs.com/xuxiaoweicomcn/java</to.image>
+        <CI_PIPELINE_IID>0</CI_PIPELINE_IID>
+        <to.auth.username></to.auth.username>
+        <to.auth.password></to.auth.password>
+        <java.tool.options>-Dfile.encoding=UTF-8</java.tool.options>
+        <TZ>Asia/Shanghai</TZ>
+        <LANG>C.UTF-8</LANG>
+        <LC_ALL>C.UTF-8</LC_ALL>
     </properties>
     <dependencies>
         <dependency>
@@ -86,6 +97,34 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <configuration>
+                    <from>
+                        <image>${from.image}</image>
+                    </from>
+                    <to>
+                        <image>${to.image}:${project.version}</image>
+                        <image>${to.image}:${project.version}-${CI_PIPELINE_IID}</image>
+                        <auth>
+                            <username>${to.auth.username}</username>
+                            <password>${to.auth.password}</password>
+                        </auth>
+                    </to>
+                    <container>
+                        <ports>
+                            <port>8080</port>
+                        </ports>
+                        <environment>
+                            <LANG>${LANG}</LANG>
+                            <LC_ALL>${LC_ALL}</LC_ALL>
+                            <TZ>${TZ}</TZ>
+                            <JAVA_TOOL_OPTIONS>${java.tool.options}</JAVA_TOOL_OPTIONS>
+                        </environment>
+                    </container>
+                </configuration>
             </plugin>
         </plugins>
     </build>
