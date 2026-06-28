@@ -19,6 +19,7 @@
         <jib-maven-plugin.version>3.5.1</jib-maven-plugin.version>
         <from.image>registry.cn-qingdao.aliyuncs.com/xuxiaoweicomcn/dragonwell:8.29.28-extended-ga-anolis
         </from.image>
+        <from.image.loong64>registry.cn-qingdao.aliyuncs.com/xuxiaoweicomcn/jdk-loong64:8-anolis</from.image.loong64>
         <to.image>registry.cn-qingdao.aliyuncs.com/xuxiaoweicomcn/java</to.image>
         <CI_PIPELINE_IID>0</CI_PIPELINE_IID>
         <to.auth.username></to.auth.username>
@@ -114,10 +115,6 @@
                                 <architecture>arm64</architecture>
                                 <os>linux</os>
                             </platform>
-                            <platform>
-                                <architecture>loong64</architecture>
-                                <os>linux</os>
-                            </platform>
                         </platforms>
                     </from>
                     <to>
@@ -145,5 +142,31 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>loong64</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.google.cloud.tools</groupId>
+                        <artifactId>jib-maven-plugin</artifactId>
+                        <version>${jib-maven-plugin.version}</version>
+                        <configuration>
+                            <from>
+                                <image>${from.image.loong64}</image>
+                                <platforms>
+                                    <platform>
+                                        <architecture>loong64</architecture>
+                                        <os>linux</os>
+                                    </platform>
+                                </platforms>
+                            </from>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
