@@ -107,9 +107,8 @@
                         <image>${from.image}</image>
                     </from>
                     <to>
-                        <image>${to.image}</image>
+                        <image>${to.image}:${project.version}</image>
                         <tags>
-                            <tag>${project.version}</tag>
                             <tag>${project.version}-${CI_PIPELINE_IID}</tag>
                         </tags>
                         <auth>
