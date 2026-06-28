@@ -9,7 +9,9 @@ build:
       -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository
       -Dorg.slf4j.simpleLogger.showDateTime=true
       -Djava.awt.headless=true
+    JAVA_HOME: /srv/jdk8u492-b09
   script:
+    - echo $JAVA_HOME
     - mvn -V -B clean package
   cache:
     key: "${CI_JOB_NAME}-${CI_COMMIT_BRANCH}"
