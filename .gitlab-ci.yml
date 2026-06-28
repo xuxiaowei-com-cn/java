@@ -18,19 +18,11 @@ build:
     - mvn -V -B compile jib:build -Dto.auth.username=$JIB_TO_AUTH_USERNAME -Dto.auth.password=$JIB_TO_AUTH_PASSWORD -DCI_PIPELINE_IID=$CI_PIPELINE_IID -P loong64
     - VERSION=$(mvn -B help:evaluate -Dexpression=project.version -q -DforceStdout)
     - TO_IMAGE=$(mvn -B help:evaluate -Dexpression=to.image -q -DforceStdout)
-    - docker login --username $JIB_TO_AUTH_USERNAME --password $JIB_TO_AUTH_PASSWORD registry.cn-qingdao.aliyuncs.com
-    - docker manifest create --amend $TO_IMAGE:$VERSION $TO_IMAGE:$VERSION-amd64 $TO_IMAGE:$VERSION-arm64 $TO_IMAGE:$VERSION-loong64
-    - docker manifest push $TO_IMAGE:$VERSION
-    - docker manifest create --amend $TO_IMAGE:$VERSION-$CI_PIPELINE_IID $TO_IMAGE:$VERSION-$CI_PIPELINE_IID-amd64 $TO_IMAGE:$VERSION-$CI_PIPELINE_IID-arm64 $TO_IMAGE:$VERSION-$CI_PIPELINE_IID-loong64
-    - docker manifest push $TO_IMAGE:$VERSION-$CI_PIPELINE_IID
     # crane from https://github.com/google/go-containerregistry (go build ./cmd/crane)
+    # Login and merge single-arch images into multi-arch manifest list
     - crane auth login registry.cn-qingdao.aliyuncs.com -u $JIB_TO_AUTH_USERNAME -p $JIB_TO_AUTH_PASSWORD
-    - crane delete $TO_IMAGE:$VERSION-amd64
-    - crane delete $TO_IMAGE:$VERSION-arm64
-    - crane delete $TO_IMAGE:$VERSION-loong64
-    - crane delete $TO_IMAGE:$VERSION-$CI_PIPELINE_IID-amd64
-    - crane delete $TO_IMAGE:$VERSION-$CI_PIPELINE_IID-arm64
-    - crane delete $TO_IMAGE:$VERSION-$CI_PIPELINE_IID-loong64
+    - crane index append -t $TO_IMAGE:$VERSION -m $TO_IMAGE:$VERSION-amd64 -m $TO_IMAGE:$VERSION-arm64 -m $TO_IMAGE:$VERSION-loong64
+    - crane index append -t $TO_IMAGE:$VERSION-$CI_PIPELINE_IID -m $TO_IMAGE:$VERSION-$CI_PIPELINE_IID-amd64 -m $TO_IMAGE:$VERSION-$CI_PIPELINE_IID-arm64 -m $TO_IMAGE:$VERSION-$CI_PIPELINE_IID-loong64
   cache:
     key: "${CI_JOB_NAME}-${CI_COMMIT_BRANCH}"
     paths:
