@@ -21,6 +21,7 @@
         </from.image>
         <from.image.loong64>registry.cn-qingdao.aliyuncs.com/xuxiaoweicomcn/jdk-loong64:8-anolis</from.image.loong64>
         <to.image>registry.cn-qingdao.aliyuncs.com/xuxiaoweicomcn/java</to.image>
+        <to.tag.suffix></to.tag.suffix>
         <CI_PIPELINE_IID>0</CI_PIPELINE_IID>
         <to.auth.username></to.auth.username>
         <to.auth.password></to.auth.password>
@@ -118,9 +119,9 @@
                         </platforms>
                     </from>
                     <to>
-                        <image>${to.image}:${project.version}</image>
+                        <image>${to.image}:${project.version}${to.tag.suffix}</image>
                         <tags>
-                            <tag>${project.version}-${CI_PIPELINE_IID}</tag>
+                            <tag>${project.version}-${CI_PIPELINE_IID}${to.tag.suffix}</tag>
                         </tags>
                         <auth>
                             <username>${to.auth.username}</username>
